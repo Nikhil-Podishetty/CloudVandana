@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Form</title>
+    <script>
+        function validateForm() {
+            var firstName = document.forms["surveyForm"]["firstName"].value;
+            var lastName = document.forms["surveyForm"]["lastName"].value;
+            var dob = document.forms["surveyForm"]["dob"].value;
+            var country = document.forms["surveyForm"]["country"].value;
+            var gender = document.forms["surveyForm"]["gender"].value;
+            var profession = document.forms["surveyForm"]["profession"].value;
+            var email = document.forms["surveyForm"]["email"].value;
+            var mobileNumber = document.forms["surveyForm"]["mobileNumber"].value;
+
+            if (firstName == "" || lastName == "" || dob == "" || country == "" || gender == "" || profession == "" || email == "" || mobileNumber == "") {
+                alert("All fields must be filled out");
+                return false;
+            }
+
+            var emailRegex = /\S+@\S+\.\S+/;
+            if (!emailRegex.test(email)) {
+                alert("Invalid email format");
+                return false;
+            }
+
+            var mobileNumberRegex = /^\d{10}$/;
+            if (!mobileNumberRegex.test(mobileNumber)) {
+                alert("Invalid mobile number format");
+                return false;
+            }
+
+            var values = {
+                "First Name": firstName,
+                "Last Name": lastName,
+                "Date of Birth": dob,
+                "Country": country,
+                "Gender": gender,
+                "Profession": profession,
+                "Email": email,
+                "Mobile Number": mobileNumber
+            };
+
+            var result = "";
+            for (var key in values) {
+                result += key + ": " + values[key] + "\n";
+            }
+
+            alert(result);
+            resetForm();
+            return false;
+        }
+
+        function resetForm() {
+            document.forms["surveyForm"].reset();
+        }
+    </script>
+        <style>
+        .surveyForm-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background-color: aqua;
+            border: 2cm;
+            
+        }
+    
+      </style>
+</head>
+<body>
+    <div class="surveyForm-container">
+    <form name="surveyForm" onsubmit="return validateForm()">
+        <label for="firstName">First Name:</label><br>
+        <input type="text" id="firstName" name="firstName"><br>
+
+        <label for="lastName">Last Name:</label><br>
+        <input type="text" id="lastName" name="lastName"><br>
+
+        <label for="dob">Date of Birth:</label><br>
+        <input type="date" id="dob" name="dob"><br>
+
+        <label for="country">Country:</label><br>
+        <select id="country" name="country">
+            <option value="">Select</option>
+            <option value="usa">USA</option>
+            <option value="uk">UK</option>
+            <option value="india">India</option>
+        </select><br>
+
+        <label for="gender">Gender:</label><br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label><br>
+
+        <label for="profession">Profession:</label><br>
+        <input type="text" id="profession" name="profession"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="email" id="email" name="email"><br>
+
+        <label for="mobileNumber">Mobile Number:</label><br>
+        <input type="text" id="mobileNumber" name="mobileNumber"><br>
+
+        <input type="submit" value="Submit">
+        <input type="reset" value="Reset">
+    </form>
+</div>
+</body>
+</html>
